@@ -34,7 +34,7 @@ export const useCharactersStore = (characterListScope: CharacterListScope) => {
         },
         getters: {
             characterCount: (state) => state?.characters?.length ?? 0,
-            hasMore: (state) => !!state.info?.next,
+            hasMore: (state) => !!state?.info?.next,
             canLoadData: (_) => {
                 return (isSearchScope && useSearchStore().searchTerm) || isListScope;
             }
@@ -65,7 +65,9 @@ export const useCharactersStore = (characterListScope: CharacterListScope) => {
                         this.refresh().then(_onUserSearchingOrFiltering);
                     }
                 }))
-                subscriptions[characterListScope].push(useFilterStore().$subscribe(this.refresh))
+                subscriptions[characterListScope].push(useFilterStore().$subscribe(() => {
+                    this.refresh().then(_onUserSearchingOrFiltering);
+                }))
             },
             async refresh() {
                 if (!this.canLoadData) return;
