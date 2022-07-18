@@ -56,6 +56,7 @@ charactersStore
     onUserSearchingOrFiltering: () => {
       if (characterListScope !== CharacterListScope.list) return;
       isUserCanScroll.value = false;
+      debugger;
       loadNextPageUntilUserCanScroll();
     },
   })
@@ -84,7 +85,7 @@ charactersStore
     <slot v-else-if="!isLoading" name="empty" />
     <slot name="loading" :loading="isLoading" />
     <div
-      class="h-2 w-full bg-transparent"
+      class="h-2 w-full bg-transparent mt-4"
       v-intersection-observer="onBottomVisible"
     />
   </ul>
