@@ -56,7 +56,6 @@ charactersStore
     onUserSearchingOrFiltering: () => {
       if (characterListScope !== CharacterListScope.list) return;
       isUserCanScroll.value = false;
-      debugger;
       loadNextPageUntilUserCanScroll();
     },
   })
